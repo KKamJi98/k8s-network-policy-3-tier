@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-a-to-b
+  namespace: b
+spec:
+  podSelector:
+    matchLabels:
+      app: b-pod
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: a
+    ports:
+    - protocol: TCP
+      port: 80
+  - from:
+    - podSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53

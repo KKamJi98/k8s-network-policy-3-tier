@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: was-service
+  namespace: was
+spec:
+  selector:
+    name: was-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
